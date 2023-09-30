@@ -1,0 +1,21 @@
+.book-item
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    margin-top: 15px
+    padding: 10px
+    font-size: 18px
+    line-height: 35px
+    cursor: pointer
+    &__title
+        &_book
+            font-weight: bold
+    &__rating
+        width: 40px
+        display: flex
+        align-items: center
+        justify-content: space-around
+
+@media (max-width: 576px)
+    .book-item
+        flex-direction: column

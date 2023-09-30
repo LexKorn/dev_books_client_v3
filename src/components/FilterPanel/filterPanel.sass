@@ -1,0 +1,41 @@
+.filter
+    display: flex
+    margin: 30px auto
+    justify-content: space-between
+    width: 70%
+    &__btn
+        width: 150px
+        height: 40px
+        border: none
+        background-color: #e8eded
+        border-radius: 15px 
+        &:hover
+            background-color: #222222
+            color: white
+        &:focus
+            background-color: darkgrey
+            color: white
+            font-weight: bold
+.search
+    width: 70%
+    display: block
+    margin: 0 auto
+    border: none
+    border-bottom: 1px solid darkgrey
+    padding: 7px
+
+
+@media ( max-width: 1119px )
+    .filter__btn
+        width: 120px
+
+@media ( max-width: 767px )
+    .filter
+        width: 100%
+        margin: 20px auto
+        display: grid
+        grid-template-columns: repeat(auto-fit, 150px)
+        gap: 20px
+        justify-content: center
+    .search
+        width: 100%
