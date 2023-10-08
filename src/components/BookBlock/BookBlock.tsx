@@ -55,8 +55,8 @@ const BookBlock: React.FunctionComponent = () => {
                 <meta name="description" content={`Страничка книги ${book.name}`} />
             </Helmet>
             <div className="book__wrapper">
-                <img src={process.env.REACT_APP_API_URL + book.cover} className='book__wrapper__cover' alt='cover of book' />
-                <div className="book__wrapper__text">                    
+                <img src={process.env.REACT_APP_API_URL + book.cover} className='book__wrapper_cover' alt='cover of book' />
+                <div className="book__wrapper_text">                    
                     <div 
                         className="book__author"
                         style={{cursor: 'pointer'}}

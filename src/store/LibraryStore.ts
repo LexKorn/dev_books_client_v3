@@ -10,6 +10,7 @@ export default class LibraryStore {
     _selectedAuthor: IAuthor;
     _visibleAuthors: IAuthor[];
     _visibleBooks: IBook[];
+    _toggle: boolean;
 
     constructor() {
        this._countries = [];
@@ -30,6 +31,7 @@ export default class LibraryStore {
         };
        this._visibleAuthors = [];
        this._visibleBooks = [];
+       this._toggle = false;
 
        makeAutoObservable(this); 
     };
@@ -55,6 +57,9 @@ export default class LibraryStore {
     setVisibleBooks(visibleBooks: IBook[]) {
         this._visibleBooks = visibleBooks;
     };
+    setToggle(bool: boolean) {
+        this._toggle = bool;
+    };
 
 
     get countries() {
@@ -77,5 +82,8 @@ export default class LibraryStore {
     };
     get visibleBooks() {
         return this._visibleBooks;
+    };
+    get toggle() {
+        return this._toggle;
     };
 };

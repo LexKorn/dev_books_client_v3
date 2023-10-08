@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import { IBook, IQuote } from '../../types/types';
 import { fetchQuotes, deleteQuote } from '../../http/quoteAPI';
-import { fetchOneBook } from '../../http/bookAPI';
+// import { fetchOneBook } from '../../http/bookAPI';
 import List from '../List/List';
 import ListItem from '../ListItem/ListItem';
 import ModalQuoteUpdate from '../Modals/ModalQuoteUpdate';
@@ -12,29 +12,35 @@ import ModalQuoteAdd from '../Modals/ModalQuoteAdd';
 
 import './quotesList.sass';
 
+interface QuotesListProps {
+    book: IBook;
+};
 
-export default function QuotesList<T> () {
+
+// export default function QuotesList<QuotesListProps> ({book}) {
+const QuotesList: React.FC<QuotesListProps> = ({book}) => {
     const [quote, setQuote] = useState<IQuote>({} as IQuote);
     const [quotes, setQuotes] = useState<IQuote[]>([]);
-    const [book, setBook] = useState<IBook>({} as IBook);
+    // const [book, setBook] = useState<IBook>({} as IBook);
     const [toggle, setToggle] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
     const [visible, setVisible] = useState<boolean>(false);
     const [visibleQuote, setVisibleQuote] = useState<boolean>(false);
-    const {id} = useParams();
+    // const {id} = useParams();
 
     useEffect(() => {
         fetchQuotes()
             .then(data => setQuotes(data))
-            .catch(err => alert(err.message));
-    }, [toggle, visible, visibleQuote]);
-
-    useEffect(() => {
-        fetchOneBook(id)
-            .then(data => setBook(data))
             .catch(err => alert(err.message))
             .finally(() => setLoading(false));
-    }, []);
+    }, [toggle, visible, visibleQuote]);
+
+    // useEffect(() => {
+    //     fetchOneBook(id)
+    //         .then(data => setBook(data))
+    //         .catch(err => alert(err.message))
+    //         .finally(() => setLoading(false));
+    // }, []);
 
     const bookQuotes: IQuote[] = quotes.filter(quote => quote.bookId === book.id);
 
@@ -53,10 +59,10 @@ export default function QuotesList<T> () {
 
     return (
         <Container className="quotes">
-            {!loading && <div className="quotes__title">
+            <div className="quotes__title">
                 <h3>Цитаты:</h3>
                 <i className="bi bi-plus-circle quotes__title_icon" onClick={() => setVisibleQuote(true)}></i>
-            </div>}
+            </div>
             <List 
                 items={bookQuotes} 
                 renderItem={(quote: IQuote) => 
@@ -82,3 +88,5 @@ export default function QuotesList<T> () {
         </Container> 
     );
 };
+
+export default QuotesList;

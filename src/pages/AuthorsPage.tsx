@@ -40,7 +40,7 @@ const AuthorsPage: React.FC = observer(() => {
 
             <Statistics />
             <FilterPanel elems={authors} />
-            <h1 style={{textAlign: 'center'}}>Список добавленных авторов:</h1>
+            <h1 style={{textAlign: 'center'}}>Список авторов:</h1>
             {loading ? <Spinner animation={"border"}/> :
                 <List
                     items={library.visibleAuthors} 
