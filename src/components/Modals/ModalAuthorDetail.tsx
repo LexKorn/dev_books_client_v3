@@ -10,14 +10,14 @@ import { Context } from '../..';
 import ModalBook from './ModalBook';
 import QuotesList from '../QuotesList/QuotesList';
 
-interface ModalBookDetailProps {
+interface ModalAuthorDetailProps {
     show: boolean;
     onHide: () => void;
     book: IBook;
 };
 
 
-const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(({show, onHide, book}) => {
+const ModalAuthorDetail: React.FunctionComponent<ModalAuthorDetailProps> = observer(({show, onHide, book}) => {
     const [visible, setVisible] = useState<boolean>(false);
     const {library} = useContext(Context);
     const navigate = useNavigate();
@@ -74,4 +74,4 @@ const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(
     );
 });
 
-export default ModalBookDetail;
+export default ModalAuthorDetail;

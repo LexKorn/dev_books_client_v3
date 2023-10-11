@@ -108,13 +108,16 @@ const FilterPanel:React.FC<FilterPanelProps> = observer(({elems}) => {
                 <button className='filter__btn' onClick={(e) => setFilter('Любимые')}>Любимые</button>
                 <button className='filter__btn' onClick={(e) => setFilter('Все')}>Все</button>
             </div>
-            <input 
-                className='search' 
-                type='text' 
-                placeholder='Начните вводить искомое слово' 
-                value={value}
-                onChange={e => setValue(e.target.value)}
-            />
+            <div className='search'>
+                <input 
+                    className='search__input' 
+                    type='text' 
+                    placeholder='Начните вводить искомое слово' 
+                    value={value}
+                    onChange={e => setValue(e.target.value)}
+                />
+                {Boolean(value) && <i className="bi bi-x-circle search__icon" onClick={() => setValue('')}></i>}
+            </div>
         </>        
     );
 });
