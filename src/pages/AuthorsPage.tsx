@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {useNavigate} from 'react-router-dom';
 import { Container, Spinner } from 'react-bootstrap';
 import {observer} from 'mobx-react-lite';
 import {Helmet} from "react-helmet";
@@ -8,6 +7,7 @@ import List from '../components/List/List';
 import AuthorItem from '../components/AuthorItem';
 import FilterPanel from '../components/FilterPanel/FilterPanel';
 import Statistics from '../components/Statistics/Statistics';
+import ModalAuthorDetail from '../components/Modals/ModalAuthorDetail';
 import { IAuthor } from '../types/types';
 import { fetchAuthors } from '../http/authorAPI';
 import { Context } from '../index';
@@ -16,8 +16,9 @@ import { Context } from '../index';
 const AuthorsPage: React.FC = observer(() => {
     const {library} = useContext(Context);
     const [authors, setAuthors] = useState<IAuthor[]>([]);
+    const [author, setAuthor] = useState<IAuthor>({} as IAuthor);
+    const [visible, setVisible] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
-    const navigate = useNavigate();
 
     useEffect(() => {
         getAuthors();
@@ -29,6 +30,11 @@ const AuthorsPage: React.FC = observer(() => {
             .catch(err => alert(err.message))
             .finally(() => setLoading(false));
     }
+
+    const selectAuthor = (item: IAuthor) => {
+        setAuthor(item);
+        setVisible(true)
+    };
 
 
     return (
@@ -46,12 +52,18 @@ const AuthorsPage: React.FC = observer(() => {
                     items={library.visibleAuthors} 
                     renderItem={(author: IAuthor) => 
                         <AuthorItem 
-                            onClick={(author) => navigate('/author/' + author.id)} 
+                            onClick={(author) => selectAuthor(author)}
                             author={author} 
                             key={author.id} 
                         />
                     } 
-                />}
+                />
+            }
+            <ModalAuthorDetail 
+                show={visible} 
+                onHideAuthor={() => setVisible(false)} 
+                author={author}
+            />
         </Container>
     );
 });

@@ -7,7 +7,7 @@ const AuthorPage: React.FC = () => {
     return (
         <div style={{marginTop: '70px'}}>
             <AuthorBlock />
-            <BooksList />
+            {/* <BooksList /> */}
         </div>
     );
 };

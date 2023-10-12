@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react';
-// import { useParams } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import { IBook, IQuote } from '../../types/types';
 import { fetchQuotes, deleteQuote } from '../../http/quoteAPI';
-// import { fetchOneBook } from '../../http/bookAPI';
 import List from '../List/List';
 import ListItem from '../ListItem/ListItem';
 import ModalQuoteUpdate from '../Modals/ModalQuoteUpdate';
@@ -17,16 +15,13 @@ interface QuotesListProps {
 };
 
 
-// export default function QuotesList<QuotesListProps> ({book}) {
 const QuotesList: React.FC<QuotesListProps> = ({book}) => {
     const [quote, setQuote] = useState<IQuote>({} as IQuote);
     const [quotes, setQuotes] = useState<IQuote[]>([]);
-    // const [book, setBook] = useState<IBook>({} as IBook);
     const [toggle, setToggle] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
     const [visible, setVisible] = useState<boolean>(false);
     const [visibleQuote, setVisibleQuote] = useState<boolean>(false);
-    // const {id} = useParams();
 
     useEffect(() => {
         fetchQuotes()
@@ -34,13 +29,6 @@ const QuotesList: React.FC<QuotesListProps> = ({book}) => {
             .catch(err => alert(err.message))
             .finally(() => setLoading(false));
     }, [toggle, visible, visibleQuote]);
-
-    // useEffect(() => {
-    //     fetchOneBook(id)
-    //         .then(data => setBook(data))
-    //         .catch(err => alert(err.message))
-    //         .finally(() => setLoading(false));
-    // }, []);
 
     const bookQuotes: IQuote[] = quotes.filter(quote => quote.bookId === book.id);
 

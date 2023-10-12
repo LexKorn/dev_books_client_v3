@@ -1,34 +1,31 @@
 import React, {useState, useContext} from 'react';
-import { useNavigate } from 'react-router-dom';
 import {observer} from 'mobx-react-lite';
 import { Modal } from 'react-bootstrap';
 
-import { IBook, IAuthor } from '../../types/types';
-import { deleteBook } from '../../http/bookAPI';
-import { AUTHOR_ROUTE } from '../../utils/consts';
+import { IAuthor, ICountry } from '../../types/types';
+import { deleteAuthor } from '../../http/authorAPI';
 import { Context } from '../..';
-import ModalBook from './ModalBook';
-import QuotesList from '../QuotesList/QuotesList';
+import ModalAuthor from './ModalAuthor';
+import BooksList from '../BooksList/BooksList';
 
 interface ModalAuthorDetailProps {
     show: boolean;
-    onHide: () => void;
-    book: IBook;
+    onHideAuthor: () => void;
+    author: IAuthor;
 };
 
 
-const ModalAuthorDetail: React.FunctionComponent<ModalAuthorDetailProps> = observer(({show, onHide, book}) => {
+const ModalAuthorDetail: React.FunctionComponent<ModalAuthorDetailProps> = observer(({show, onHideAuthor, author}) => {
     const [visible, setVisible] = useState<boolean>(false);
     const {library} = useContext(Context);
-    const navigate = useNavigate();
 
-    const authorBook: IAuthor[] = library.authors.filter(author => author.id === book.authorId);
+    const countryAuthor: ICountry[] = library.countries.filter(country => country.id === author.countryId);
 
-    const removeBook = () => {
-        if (window.confirm('Ты действительно хочешь удалить книгу?')) {
-            deleteBook(book.id);
+    const removeAuthor = () => {
+        if (window.confirm('Ты действительно хочешь удалить автора?')) {
+            deleteAuthor(author.id);
             library.setToggle(!library.toggle);
-            onHide();
+            onHideAuthor();
         }        
     };
 
@@ -36,39 +33,30 @@ const ModalAuthorDetail: React.FunctionComponent<ModalAuthorDetailProps> = obser
     return (
         <Modal
             show={show}
-            onHide={onHide}
+            onHide={onHideAuthor}
             fullscreen="xxl-down"
             >
             <Modal.Body>
-                    <div className="book__wrapper">
-                        <img src={process.env.REACT_APP_API_URL + book.cover} className='book__wrapper_cover' alt='cover of book' />
-                        <div className="book__wrapper_text">                    
-                            <div 
-                                className="book__author"
-                                style={{cursor: 'pointer'}}
-                                onClick={() => {navigate(AUTHOR_ROUTE + `/${authorBook[0].id}`)}}
-                                >{authorBook.length > 0 ? authorBook[0].name : ''}
-                            </div>
-                            <div className="book__name">{book.name}</div>
-                            <div className="book__rating">{book.rating}</div>
-                            {book.link &&
-                                <a className="book__link" href={book.link} target="_blank">Прочитать можно здесь &gt;&gt;</a>
-                            }
-                            <div className="book__comment">{book.comment}</div>
-                        </div>                
-                    </div>
-                
-                <div className="book__icons">
-                    <i className="bi bi-pencil-fill list-item__icon" onClick={() => setVisible(true)}></i>
-                    <i className="bi bi-trash3-fill list-item__icon" onClick={removeBook}></i>
-                    <i className="bi bi-x-circle-fill list-item__icon" onClick={onHide}></i>
+                <div className="author__wrapper">
+                    <img src={process.env.REACT_APP_API_URL + author.photo} className='author__wrapper__photo' alt="photo of author" />
+                    <div className="author__wrapper__text">
+                        <div className="author__name">{author.name}</div>
+                        <div className="author__country">{countryAuthor.length > 0 ? countryAuthor[0].name : ''}</div>
+                        <div className="author__description">{author.description}</div>
+                    </div>                
                 </div>
-                <QuotesList book={book} />
+                
+                <div className="author__icons">
+                    <i className="bi bi-pencil-fill list-item__icon" onClick={() => setVisible(true)}></i>
+                    <i className="bi bi-trash3-fill list-item__icon" onClick={removeAuthor}></i>
+                    <i className="bi bi-x-circle-fill list-item__icon" onClick={onHideAuthor}></i>
+                </div>
+                <BooksList author={author} />
             </Modal.Body>
-            <ModalBook 
+            <ModalAuthor
                 show={visible} 
                 onHide={() => setVisible(false)} 
-                book={book}
+                author={author}
             />
         </Modal>
     );

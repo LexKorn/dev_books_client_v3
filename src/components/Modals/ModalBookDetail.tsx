@@ -1,13 +1,12 @@
 import React, {useState, useContext} from 'react';
-import { useNavigate } from 'react-router-dom';
 import {observer} from 'mobx-react-lite';
 import { Modal } from 'react-bootstrap';
 
 import { IBook, IAuthor } from '../../types/types';
 import { deleteBook } from '../../http/bookAPI';
-import { AUTHOR_ROUTE } from '../../utils/consts';
 import { Context } from '../..';
 import ModalBook from './ModalBook';
+import ModalAuthorDetail from './ModalAuthorDetail';
 import QuotesList from '../QuotesList/QuotesList';
 
 interface ModalBookDetailProps {
@@ -19,8 +18,8 @@ interface ModalBookDetailProps {
 
 const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(({show, onHide, book}) => {
     const [visible, setVisible] = useState<boolean>(false);
+    const [visibleAuthor, setVisibleAuthor] = useState<boolean>(false);
     const {library} = useContext(Context);
-    const navigate = useNavigate();
 
     const authorBook: IAuthor[] = library.authors.filter(author => author.id === book.authorId);
 
@@ -30,6 +29,12 @@ const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(
             library.setToggle(!library.toggle);
             onHide();
         }        
+    };
+
+    const showAuthor = () => {
+        setVisibleAuthor(true);
+        setVisible(false);
+        // onHide();
     };
 
 
@@ -46,13 +51,14 @@ const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(
                             <div 
                                 className="book__author"
                                 style={{cursor: 'pointer'}}
-                                onClick={() => {navigate(AUTHOR_ROUTE + `/${authorBook[0].id}`)}}
+                                onClick={showAuthor}
+                                // onClick={() => setVisibleAuthor(true)}
                                 >{authorBook.length > 0 ? authorBook[0].name : ''}
                             </div>
                             <div className="book__name">{book.name}</div>
                             <div className="book__rating">{book.rating}</div>
                             {book.link &&
-                                <a className="book__link" href={book.link} target="_blank">Прочитать можно здесь &gt;&gt;</a>
+                                <a className="book__link" href={book.link} target="_blank" rel="noreferrer">Прочитать можно здесь &gt;&gt;</a>
                             }
                             <div className="book__comment">{book.comment}</div>
                         </div>                
@@ -69,6 +75,11 @@ const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(
                 show={visible} 
                 onHide={() => setVisible(false)} 
                 book={book}
+            />
+            <ModalAuthorDetail 
+                show={visibleAuthor} 
+                onHideAuthor={() => setVisibleAuthor(false)} 
+                author={ authorBook[0]}
             />
         </Modal>
     );
