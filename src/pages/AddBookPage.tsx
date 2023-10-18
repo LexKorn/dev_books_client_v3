@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Helmet} from "react-helmet";
 
 import { createBook } from '../http/bookAPI';
-import CUBook from '../components/CUBook';
+import CUBook from '../components/CreateUpdate/CUBook';
 
 
 const AddBookPage: React.FC = () => {

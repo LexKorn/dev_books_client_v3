@@ -3,7 +3,7 @@ import {Modal, Button} from 'react-bootstrap';
 
 import { updateQuote } from '../../http/quoteAPI';
 import { IQuote } from '../../types/types';
-import CUQuote from '../CUQuote';
+import CUQuote from '../CreateUpdate/CUQuote';
 
 interface ModalQuoteUpdateProps {
     show: boolean;

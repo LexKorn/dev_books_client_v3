@@ -17,13 +17,12 @@ const BookItem: React.FC<BookItemProps> = observer(({book, onClick}) => {
     const {library} = useContext(Context);
     const authorBook: IAuthor[] = library.authors.filter(author => author.id === book.authorId);
 
-    if (authorBook.length > 0) {
+    if (Boolean(authorBook.length)) {
         return (
             <Card 
                 className="book-item shadow"
                 onClick={() => onClick(book)}
             >
-                {/* <div className='book-item__title'><span>{book.name}</span> - {authorBook[0].name} </div> */}
                 <div className='book-item__title'>
                     <div className='book-item__title_book'>{book.name}</div>
                     <div className='book-item__title_author'>{authorBook[0].name}</div>
@@ -33,7 +32,7 @@ const BookItem: React.FC<BookItemProps> = observer(({book, onClick}) => {
         );
     } else {
         return (
-            <div></div>
+            <></>
         );
     }
 });

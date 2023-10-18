@@ -11,6 +11,7 @@ import ModalBookDetail from '../components/Modals/ModalBookDetail';
 import { IBook } from '../types/types';
 import { fetchBooks } from '../http/bookAPI';
 import { fetchAuthors } from '../http/authorAPI';
+import { fetchCountries } from '../http/countryAPI';
 import { Context } from '../index';
 
 
@@ -23,6 +24,7 @@ const MainPage: React.FC = observer(() => {
     useEffect(() => {
         getBooks();
         fetchAuthors().then(data => library.setAuthors(data));
+        fetchCountries().then(data => library.setCountries(data));
     }, []);
   
     function getBooks() {
@@ -60,8 +62,8 @@ const MainPage: React.FC = observer(() => {
                 />
             }
             <ModalBookDetail 
-                show={visible} 
-                onHide={() => setVisible(false)} 
+                showBook={visible} 
+                onHideBook={() => setVisible(false)} 
                 book={book}
             />
         </Container>

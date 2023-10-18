@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import {Container, Button, Form, Dropdown} from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 
-import { Context } from '../index';
-import { fetchCountries } from '../http/countryAPI';
-import { AUTHORS_ROUTE } from '../utils/consts';
-import ModalCountry from './Modals/ModalCountry';
+import { Context } from '../../index';
+import { fetchCountries } from '../../http/countryAPI';
+import { AUTHORS_ROUTE } from '../../utils/consts';
+import ModalCountry from '../Modals/ModalCountry';
 
 interface CUAuthorProps {
     id: number;

@@ -19,7 +19,7 @@ const QuotesList: React.FC<QuotesListProps> = ({book}) => {
     const [quote, setQuote] = useState<IQuote>({} as IQuote);
     const [quotes, setQuotes] = useState<IQuote[]>([]);
     const [toggle, setToggle] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(true);
+    // const [loading, setLoading] = useState<boolean>(true);
     const [visible, setVisible] = useState<boolean>(false);
     const [visibleQuote, setVisibleQuote] = useState<boolean>(false);
 
@@ -27,7 +27,7 @@ const QuotesList: React.FC<QuotesListProps> = ({book}) => {
         fetchQuotes()
             .then(data => setQuotes(data))
             .catch(err => alert(err.message))
-            .finally(() => setLoading(false));
+            // .finally(() => setLoading(false));
     }, [toggle, visible, visibleQuote]);
 
     const bookQuotes: IQuote[] = quotes.filter(quote => quote.bookId === book.id);

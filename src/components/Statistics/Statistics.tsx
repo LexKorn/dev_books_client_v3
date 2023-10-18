@@ -21,7 +21,8 @@ const Statistics: React.FC = () => {
         <div className='statistics'>
             <div className='statistics__icons'>
                 <NavLink to={MAIN_ROUTE} className='statistics__icons_link'><i className="bi bi-book-half"></i>{quantityBooks}</NavLink>
-                <NavLink to={AUTHORS_ROUTE} className='statistics__icons_link'><i className="bi bi-person-circle"></i> {quantityAuthors}</NavLink>
+                <NavLink to={AUTHORS_ROUTE} className='statistics__icons_link'><i className="bi bi-person-fill"></i> {quantityAuthors}</NavLink>
+                {/* bi-person-vcard    bi-person-bounding-box*/}
             </div>
         </div>
     );

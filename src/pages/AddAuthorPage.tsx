@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Helmet} from "react-helmet";
 
-import CUAuthor from '../components/CUAuthor';
+import CUAuthor from '../components/CreateUpdate/CUAuthor';
 import { createAuthor } from '../http/authorAPI';
 
 

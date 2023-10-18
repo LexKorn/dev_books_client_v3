@@ -1,25 +1,29 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
 import { Modal } from 'react-bootstrap';
 
 import { IBook, IAuthor } from '../../types/types';
 import { deleteBook } from '../../http/bookAPI';
 import { Context } from '../..';
-import ModalBook from './ModalBook';
+import ModalBook from './ModalBookUpdate';
 import ModalAuthorDetail from './ModalAuthorDetail';
 import QuotesList from '../QuotesList/QuotesList';
 
 interface ModalBookDetailProps {
-    show: boolean;
-    onHide: () => void;
+    showBook: boolean;
+    onHideBook: () => void;
     book: IBook;
 };
 
 
-const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(({show, onHide, book}) => {
+const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(({showBook, onHideBook, book}) => {
     const [visible, setVisible] = useState<boolean>(false);
     const [visibleAuthor, setVisibleAuthor] = useState<boolean>(false);
     const {library} = useContext(Context);
+
+    useEffect(() => {
+        library.setSelectedAuthor(authorBook[0]);
+    }, [book]);
 
     const authorBook: IAuthor[] = library.authors.filter(author => author.id === book.authorId);
 
@@ -27,21 +31,20 @@ const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(
         if (window.confirm('Ты действительно хочешь удалить книгу?')) {
             deleteBook(book.id);
             library.setToggle(!library.toggle);
-            onHide();
+            onHideBook();
         }        
     };
 
-    const showAuthor = () => {
-        setVisibleAuthor(true);
-        setVisible(false);
-        // onHide();
+    const closeModals = () => {
+        setVisibleAuthor(false);
+        onHideBook()
     };
 
 
     return (
         <Modal
-            show={show}
-            onHide={onHide}
+            show={showBook}
+            onHide={onHideBook}
             fullscreen="xxl-down"
             >
             <Modal.Body>
@@ -51,8 +54,7 @@ const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(
                             <div 
                                 className="book__author"
                                 style={{cursor: 'pointer'}}
-                                onClick={showAuthor}
-                                // onClick={() => setVisibleAuthor(true)}
+                                onClick={() => setVisibleAuthor(true)}
                                 >{authorBook.length > 0 ? authorBook[0].name : ''}
                             </div>
                             <div className="book__name">{book.name}</div>
@@ -67,7 +69,7 @@ const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(
                 <div className="book__icons">
                     <i className="bi bi-pencil-fill list-item__icon" onClick={() => setVisible(true)}></i>
                     <i className="bi bi-trash3-fill list-item__icon" onClick={removeBook}></i>
-                    <i className="bi bi-x-circle-fill list-item__icon" onClick={onHide}></i>
+                    <i className="bi bi-x-circle-fill list-item__icon" onClick={onHideBook}></i>
                 </div>
                 <QuotesList book={book} />
             </Modal.Body>
@@ -77,8 +79,8 @@ const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(
                 book={book}
             />
             <ModalAuthorDetail 
-                show={visibleAuthor} 
-                onHideAuthor={() => setVisibleAuthor(false)} 
+                showAuthor={visibleAuthor} 
+                onHideAuthor={closeModals}
                 author={ authorBook[0]}
             />
         </Modal>

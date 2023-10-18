@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Modal, Button} from 'react-bootstrap';
 
 import { createQuote } from '../../http/quoteAPI';
-import CUQuote from '../CUQuote';
+import CUQuote from '../CreateUpdate/CUQuote';
 
 interface ModalQuoteAddProps {
     show: boolean;

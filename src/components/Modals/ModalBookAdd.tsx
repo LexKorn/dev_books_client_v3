@@ -1,22 +1,21 @@
 import React, {useState} from 'react';
 import {Modal, Button} from 'react-bootstrap';
 
-import { updateBook } from '../../http/bookAPI';
-import { IBook } from '../../types/types';
-import CUBook from '../CUBook';
+import { createBook } from '../../http/bookAPI';
+// import { IBook } from '../../types/types';
+import CUBook from '../CreateUpdate/CUBook';
 
-interface ModalBookProps {
+interface ModalBookAddProps {
     show: boolean;
     onHide: () => void;
-    book: IBook;
 };
 
 
-const ModalBook: React.FC<ModalBookProps> = ({show, onHide, book}) => {
-    const [name, setName] = useState<string>(book.name);
-    const [link, setLink] = useState<string>(book.link);
-    const [rating, setRating] = useState<number>(book.rating);
-    const [comment, setComment] = useState<string>(book.comment);
+const ModalBookAdd: React.FC<ModalBookAddProps> = ({show, onHide}) => {
+    const [name, setName] = useState<string>('');
+    const [link, setLink] = useState<string>('');
+    const [rating, setRating] = useState<number>(5);
+    const [comment, setComment] = useState<string>('');
     const [file, setFile] = useState<string>('');
     
     return (
@@ -28,7 +27,7 @@ const ModalBook: React.FC<ModalBookProps> = ({show, onHide, book}) => {
             >
             <Modal.Body>
                 <CUBook 
-                    id={book.id}
+                    id={0}
                     name={name}
                     link={link}
                     rating={rating}
@@ -40,9 +39,10 @@ const ModalBook: React.FC<ModalBookProps> = ({show, onHide, book}) => {
                     setComment={setComment}
                     // @ts-ignore
                     setFile={setFile}
-                    handler={updateBook}
-                    title='Обновить книгу'
-                    btnName='Обновить'
+                    // @ts-ignore
+                    handler={createBook}
+                    title='Добавить книгу'
+                    btnName='Добавить'
                 />
             </Modal.Body>
             <Modal.Footer>
@@ -52,4 +52,4 @@ const ModalBook: React.FC<ModalBookProps> = ({show, onHide, book}) => {
     );
 };
 
-export default ModalBook;
+export default ModalBookAdd;

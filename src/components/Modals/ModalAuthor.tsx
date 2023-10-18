@@ -3,7 +3,7 @@ import {Modal, Button} from 'react-bootstrap';
 
 import { updateAuthor } from '../../http/authorAPI';
 import { IAuthor } from '../../types/types';
-import CUAuthor from '../CUAuthor';
+import CUAuthor from '../CreateUpdate/CUAuthor';
 
 interface ModalAuthorProps {
     show: boolean;

@@ -9,7 +9,7 @@ import { MAIN_ROUTE, AUTHOR_ROUTE, NOTFOUND_ROUTE } from '../../utils/consts';
 import { deleteBook, fetchOneBook } from '../../http/bookAPI';
 import { fetchAuthors } from '../../http/authorAPI';
 import {Context} from '../../index';
-import ModalBook from '../Modals/ModalBook';
+import ModalBook from '../Modals/ModalBookUpdate';
 
 import './bookBlock.sass';
 

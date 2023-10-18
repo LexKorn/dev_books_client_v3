@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import {Container, Button, Form, Dropdown} from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 
-import { Context } from '../index';
-import { fetchAuthors } from '../http/authorAPI';
-import { ADD_AUTHOR_ROUTE, MAIN_ROUTE, AUTHOR_ROUTE } from '../utils/consts';
-import { IAuthor } from '../types/types';
+import { Context } from '../../index';
+import { fetchAuthors } from '../../http/authorAPI';
+import { ADD_AUTHOR_ROUTE, MAIN_ROUTE, AUTHOR_ROUTE } from '../../utils/consts';
+import { IAuthor } from '../../types/types';
 
 interface CUBookProps {
     id: number;
@@ -123,7 +123,7 @@ const CUBook: React.FC<CUBookProps> = observer(({id, name, link, rating, comment
                         onChange={selectFile}
                     />                    
                     <Dropdown className="mt-3 mb-3">
-                        <Dropdown.Toggle variant={"outline-dark"}>{library.selectedAuthor.name || 'Выберите автора'}</Dropdown.Toggle>
+                        <Dropdown.Toggle variant={"outline-dark"} disabled={Boolean(library.selectedAuthor.id) ? true : false} >{library.selectedAuthor.name || 'Выберите автора'}</Dropdown.Toggle>
                         <Dropdown.Menu>
                             {library.authors.map(author => 
                                 <Dropdown.Item 

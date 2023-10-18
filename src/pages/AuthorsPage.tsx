@@ -10,23 +10,26 @@ import Statistics from '../components/Statistics/Statistics';
 import ModalAuthorDetail from '../components/Modals/ModalAuthorDetail';
 import { IAuthor } from '../types/types';
 import { fetchAuthors } from '../http/authorAPI';
+import { fetchBooks } from '../http/bookAPI';
+import { fetchCountries } from '../http/countryAPI';
 import { Context } from '../index';
 
 
 const AuthorsPage: React.FC = observer(() => {
     const {library} = useContext(Context);
-    const [authors, setAuthors] = useState<IAuthor[]>([]);
     const [author, setAuthor] = useState<IAuthor>({} as IAuthor);
     const [visible, setVisible] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         getAuthors();
+        fetchBooks().then(data => library.setBooks(data));
+        fetchCountries().then(data => library.setCountries(data));
     }, []);
   
     function getAuthors() {
         fetchAuthors()
-            .then(data => setAuthors(data))
+            .then(data => library.setAuthors(data))
             .catch(err => alert(err.message))
             .finally(() => setLoading(false));
     }
@@ -45,7 +48,7 @@ const AuthorsPage: React.FC = observer(() => {
             </Helmet>
 
             <Statistics />
-            <FilterPanel elems={authors} />
+            <FilterPanel elems={library.authors} />
             <h1 style={{textAlign: 'center'}}>Список авторов:</h1>
             {loading ? <Spinner animation={"border"}/> :
                 <List
@@ -60,7 +63,7 @@ const AuthorsPage: React.FC = observer(() => {
                 />
             }
             <ModalAuthorDetail 
-                show={visible} 
+                showAuthor={visible} 
                 onHideAuthor={() => setVisible(false)} 
                 author={author}
             />

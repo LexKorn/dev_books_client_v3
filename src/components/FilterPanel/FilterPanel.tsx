@@ -36,7 +36,7 @@ const FilterPanel:React.FC<FilterPanelProps> = observer(({elems}) => {
         }
     }, [value, filter, elems]);
         
-    const arrAuthorId: number[] = library.books.map(book => book.authorId);
+    const arrAuthorId: number[] = library.books.filter(book => book.rating > 7).map(book => book.authorId);
     
     const authorFrequency = arrAuthorId.reduce((acc: {[index: string]:any}, elem) => {
         acc[elem] = (acc[elem] || 0) + 1;
@@ -81,7 +81,7 @@ const FilterPanel:React.FC<FilterPanelProps> = observer(({elems}) => {
                     // @ts-ignore 
                     items.filter(item => item.rating >= 8)
                     : 
-                    items.filter(item => authorFrequency[item.id] > 4);
+                    items.filter(item => authorFrequency[item.id] > 2);
             case 'Все':
                 return items;
             default:
