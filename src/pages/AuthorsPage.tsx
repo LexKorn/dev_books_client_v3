@@ -41,7 +41,9 @@ const AuthorsPage: React.FC = observer(() => {
 
 
     return (
-        <Container>
+        <Container
+            style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
+        >
             <Helmet>
                 <title>Список авторов</title>
                 <meta name="description" content="Список авторов" />

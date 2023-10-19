@@ -40,7 +40,9 @@ const MainPage: React.FC = observer(() => {
     };
 
     return (        
-        <Container>
+        <Container
+            style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
+        >
             <Helmet>
                 <title>Мои книги</title>
                 <meta name="description" content="Портал прочитанных книг" />
