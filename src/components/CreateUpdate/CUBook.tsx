@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Context } from '../../index';
 import { fetchAuthors } from '../../http/authorAPI';
-import { ADD_AUTHOR_ROUTE, MAIN_ROUTE, AUTHOR_ROUTE } from '../../utils/consts';
+import { ADD_AUTHOR_ROUTE, AUTHOR_ROUTE } from '../../utils/consts';
 import { IAuthor } from '../../types/types';
 
 interface CUBookProps {
@@ -58,8 +58,6 @@ const CUBook: React.FC<CUBookProps> = observer(({id, name, link, rating, comment
             return alert('Автора необходимо указать');
         } else if (rating < 1 || rating > 10) {
             return alert ('Оценка книги должна быть от 1 до 10');
-        // } else if (!isValidUrl(link)) {
-        //     return alert ('Неверный формат ссылки');
         }
 
         const formData = new FormData();
@@ -123,7 +121,7 @@ const CUBook: React.FC<CUBookProps> = observer(({id, name, link, rating, comment
                         onChange={selectFile}
                     />                    
                     <Dropdown className="mt-3 mb-3">
-                        <Dropdown.Toggle variant={"outline-dark"} disabled={Boolean(library.selectedAuthor.id) ? true : false} >{library.selectedAuthor.name || 'Выберите автора'}</Dropdown.Toggle>
+                        <Dropdown.Toggle variant={"outline-dark"} disabled={Boolean(library.selectedAuthor?.id) ? true : false} >{library.selectedAuthor?.name || 'Выберите автора'}</Dropdown.Toggle>
                         <Dropdown.Menu>
                             {library.authors.map(author => 
                                 <Dropdown.Item 

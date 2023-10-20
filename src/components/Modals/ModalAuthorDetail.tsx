@@ -7,7 +7,6 @@ import { deleteAuthor } from '../../http/authorAPI';
 import { Context } from '../..';
 import ModalAuthor from './ModalAuthor';
 import BooksList from '../BooksList/BooksList';
-import ModalBookAdd from './ModalBookAdd';
 
 interface ModalAuthorDetailProps {
     showAuthor: boolean;
@@ -18,7 +17,6 @@ interface ModalAuthorDetailProps {
 
 const ModalAuthorDetail: React.FunctionComponent<ModalAuthorDetailProps> = observer(({showAuthor, onHideAuthor, author}) => {
     const [visible, setVisible] = useState<boolean>(false);
-    const [visibleAddBook, setVisibleAddBook] = useState<boolean>(false);
     const {library} = useContext(Context);
 
     useEffect(() => {
@@ -58,20 +56,12 @@ const ModalAuthorDetail: React.FunctionComponent<ModalAuthorDetailProps> = obser
                     <i className="bi bi-trash3-fill list-item__icon" onClick={removeAuthor}></i>
                     <i className="bi bi-x-circle-fill list-item__icon" onClick={onHideAuthor}></i>
                 </div>
-                <div className="books-list__title">
-                    <h3 style={{textAlign: 'center'}}>Книги автора:</h3>
-                    <i className="bi bi-plus-circle quotes__title_icon" onClick={() => setVisibleAddBook(true)}></i>
-                </div>
                 <BooksList author={author} />
             </Modal.Body>
             <ModalAuthor
                 show={visible} 
                 onHide={() => setVisible(false)} 
                 author={author}
-            />
-            <ModalBookAdd
-                show={visibleAddBook}
-                onHide={() => setVisibleAddBook(false)}
             />
         </Modal>
     );
