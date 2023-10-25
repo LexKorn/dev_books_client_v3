@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 import { IBook, IQuote } from '../../types/types';
 import { fetchQuotes, deleteQuote } from '../../http/quoteAPI';
 import List from '../List/List';
-import ListItem from '../ListItem/ListItem';
+import QuoteItem from '../QuoteItem/QuoteItem';
 import ModalQuoteUpdate from '../Modals/ModalQuoteUpdate';
 import ModalQuoteAdd from '../Modals/ModalQuoteAdd';
 
@@ -54,7 +54,7 @@ const QuotesList: React.FC<QuotesListProps> = ({book}) => {
             <List 
                 items={bookQuotes} 
                 renderItem={(quote: IQuote) => 
-                    <ListItem 
+                    <QuoteItem 
                         onDelete={() => removeQuote(quote)} 
                         onEdit={() => editQuote(quote)} 
                         item={quote} 

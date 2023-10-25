@@ -10,6 +10,7 @@ import { deleteAuthor, fetchOneAuthor } from '../../http/authorAPI';
 import { fetchCountries } from '../../http/countryAPI';
 import {Context} from '../../index';
 import ModalAuthor from '../Modals/ModalAuthor';
+import BooksList from '../BooksList/BooksList';
 
 import './authorBlock.sass';
 
@@ -54,15 +55,19 @@ const AuthorBlock: React.FunctionComponent = () => {
                 <meta name="description" content={`Страничка ${author.name}`} />
             </Helmet>
             <div className="author__wrapper">
-                <img src={process.env.REACT_APP_API_URL + author.photo} className='author__wrapper__photo' alt="photo of author" />
-                <div className="author__wrapper__text">
-                    <div className="author__name">{author.name}</div>
-                    <div className="author__country">{countryAuthor.length > 0 ? countryAuthor[0].name : ''}</div>
-                    <button className='author__button' onClick={() => setVisible(true)}>Редактировать</button>
-                    <button className='author__button' onClick={removeAuthor}>Удалить</button>
-                    <div className="author__description">{author.description}</div>
-                </div>                
-            </div>
+                    <img src={process.env.REACT_APP_API_URL + author.photo} className='author__wrapper_photo' alt="photo of author" />
+                    <div className="author__wrapper_text">
+                        <div className="author__name">{author.name}</div>
+                        <div className="author__country">{Boolean(countryAuthor.length) && countryAuthor[0].name}</div>
+                        <div className="author__description">{author.description}</div>
+                    </div>                
+                </div>
+                
+                <div className="author__icons">
+                    <i className="bi bi-pencil-fill list-item__icon" onClick={() => setVisible(true)}></i>
+                    <i className="bi bi-trash3-fill list-item__icon" onClick={removeAuthor}></i>
+                </div>
+            <BooksList author={author}/>
             <ModalAuthor 
                 show={visible} 
                 onHide={() => setVisible(false)} 

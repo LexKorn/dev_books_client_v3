@@ -51,11 +51,11 @@ const Header: React.FC = () => {
                                     + АВТОР
                                 </NavLink>
                             </li>
-                            <li className="header__menu_item">
+                            {/* <li className="header__menu_item">
                                 <NavLink to={ADD_BOOK_ROUTE} className={location.pathname === ADD_BOOK_ROUTE ? "active" : ''} >
                                     + КНИГА
                                 </NavLink>
-                            </li>
+                            </li> */}
                             <li className="header__menu_item">
                                 <NavLink to={NOTE_ROUTE} className={location.pathname === NOTE_ROUTE ? "active" : ''} >
                                     ПРОЧИТАТЬ

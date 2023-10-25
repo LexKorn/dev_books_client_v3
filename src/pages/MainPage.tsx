@@ -23,6 +23,9 @@ const MainPage: React.FC = observer(() => {
 
     useEffect(() => {
         getBooks();
+    }, [library.toggle]);
+
+    useEffect(() => {
         fetchAuthors().then(data => library.setAuthors(data));
         fetchCountries().then(data => library.setCountries(data));
     }, []);

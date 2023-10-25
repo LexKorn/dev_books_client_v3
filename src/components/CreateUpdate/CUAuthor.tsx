@@ -111,13 +111,13 @@ const CUAuthor: React.FC<CUAuthorProps> = observer(({id, name, description, file
                         type="file"
                         accept="image/*"
                         onChange={selectFile}
-                    />                    
+                    />
                     <Dropdown className="mt-3 mb-3">
                         <Dropdown.Toggle variant={"outline-dark"}>{library.selectedCountry.name || 'Выберите страну'}</Dropdown.Toggle>
-                        <Dropdown.Menu>
+                        <Dropdown.Menu style={{ maxHeight: "200px", overflowY: "scroll" }}>
                             {library.countries.map(country => 
                                 <Dropdown.Item 
-                                    onClick={() => library.setSelectedCountry(country)} 
+                                    onClick={() => library.setSelectedCountry(country)}
                                     key={country.id} >
                                         {country.name}
                                 </Dropdown.Item>                                
@@ -126,7 +126,7 @@ const CUAuthor: React.FC<CUAuthorProps> = observer(({id, name, description, file
                         </Dropdown.Menu>
                     </Dropdown>            
                 </Form>
-                <Button variant={"outline-dark"} onClick={onClick} className="mt-3">{btnName}</Button>           
+                <Button variant={btnName === 'Добавить' ? "outline-success" : "outline-primary"} onClick={onClick} className="mt-3">{btnName}</Button>           
             </div>   
             <ModalCountry show={visible} onHide={() => setVisible(false)} />
         </Container>

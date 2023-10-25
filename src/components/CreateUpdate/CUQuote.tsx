@@ -50,7 +50,7 @@ const CUQuote: React.FC<CUQuoteProps> = ({id, quote, setQuote, bookId, handler, 
                     maxLength={700}
                 />          
             </Form>
-            <Button variant={"outline-dark"} onClick={onClick} className="mt-3" style={{width: 100}}>{btnName}</Button>
+            <Button variant={btnName === 'Добавить' ? "outline-success" : "outline-primary"} onClick={onClick} className="mt-3" style={{width: 100}}>{btnName}</Button>
         </Container>
     );
 };

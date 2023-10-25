@@ -70,10 +70,11 @@ const NotesPage: React.FC = () => {
             </Helmet>
 
             <h1 className='notes__title'>Список книг, которые планирую прочитать:</h1>
-            <Form className="d-flex justify-content-between mt-5 mb-5 notes__form">
+            <Form className="d-flex justify-content-between mt-3 mb-4 notes__form">
                 <Form.Control
                     value={value}
                     onChange={e => setValue(e.target.value)}
+                    className='notes__form_input'
                     // @ts-ignore
                     onKeyPress={e => keyPress(e)}
                     placeholder={"Добавить книгу"}

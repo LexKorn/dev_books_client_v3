@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Context } from '../../index';
 import { fetchAuthors } from '../../http/authorAPI';
-import { ADD_AUTHOR_ROUTE, AUTHOR_ROUTE } from '../../utils/consts';
+import { ADD_AUTHOR_ROUTE, AUTHOR_ROUTE, MAIN_ROUTE } from '../../utils/consts';
 import { IAuthor } from '../../types/types';
 
 interface CUBookProps {
@@ -72,11 +72,13 @@ const CUBook: React.FC<CUBookProps> = observer(({id, name, link, rating, comment
         if (btnName === 'Добавить') {
             // @ts-ignore 
             handler(formData).then(() => {
+                // navigate(MAIN_ROUTE);
                 navigate(AUTHOR_ROUTE + '/' + library.selectedAuthor.id);
                 library.setSelectedAuthor({} as IAuthor);
             });
         } else {
             handler(id, formData).then(() => {
+                // navigate(MAIN_ROUTE);
                 navigate(AUTHOR_ROUTE + '/' + library.selectedAuthor.id);
                 library.setSelectedAuthor({} as IAuthor);
             });
@@ -122,7 +124,7 @@ const CUBook: React.FC<CUBookProps> = observer(({id, name, link, rating, comment
                     />                    
                     <Dropdown className="mt-3 mb-3">
                         <Dropdown.Toggle variant={"outline-dark"} disabled={Boolean(library.selectedAuthor?.id) ? true : false} >{library.selectedAuthor?.name || 'Выберите автора'}</Dropdown.Toggle>
-                        <Dropdown.Menu>
+                        <Dropdown.Menu style={{ maxHeight: "200px", overflowY: "scroll" }} >
                             {library.authors.map(author => 
                                 <Dropdown.Item 
                                     onClick={() => library.setSelectedAuthor(author)} 
@@ -134,7 +136,7 @@ const CUBook: React.FC<CUBookProps> = observer(({id, name, link, rating, comment
                         </Dropdown.Menu>
                     </Dropdown>            
                 </Form>
-                <Button variant={"outline-dark"} onClick={onClick} className="mt-3">{btnName}</Button>           
+                <Button variant={btnName === 'Добавить' ? "outline-success" : "outline-primary"} onClick={onClick} className="mt-3">{btnName}</Button>           
             </div>
         </Container>
     );
