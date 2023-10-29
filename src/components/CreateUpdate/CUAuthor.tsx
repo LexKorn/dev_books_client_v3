@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { Context } from '../../index';
 import { fetchCountries } from '../../http/countryAPI';
 import { AUTHORS_ROUTE } from '../../utils/consts';
+import { ICountry } from '../../types/types';
 import ModalCountry from '../Modals/ModalCountry';
 
 interface CUAuthorProps {
@@ -28,7 +29,7 @@ const CUAuthor: React.FC<CUAuthorProps> = observer(({id, name, description, file
     const [visible, setVisible] = useState<boolean>(false);
 
     useEffect(() => {
-        fetchCountries().then(data => library.setCountries(data));
+        fetchCountries().then(data => library.setCountries(data.sort((a: ICountry, b: ICountry) => a.name > b.name ? 1 : -1)));
     }, [visible]);
 
     const selectFile = (e: React.ChangeEvent<HTMLInputElement>) => { 

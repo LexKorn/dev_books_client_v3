@@ -31,7 +31,7 @@ const CUBook: React.FC<CUBookProps> = observer(({id, name, link, rating, comment
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetchAuthors().then(data => library.setAuthors(data));
+        fetchAuthors().then(data => library.setAuthors(data.sort((a: IAuthor, b: IAuthor) => a.name > b.name ? 1 : -1)));
     }, []);    
 
     const selectFile = (e: React.ChangeEvent<HTMLInputElement>) => { 
@@ -72,14 +72,12 @@ const CUBook: React.FC<CUBookProps> = observer(({id, name, link, rating, comment
         if (btnName === 'Добавить') {
             // @ts-ignore 
             handler(formData).then(() => {
-                // navigate(MAIN_ROUTE);
-                navigate(AUTHOR_ROUTE + '/' + library.selectedAuthor.id);
+                window.location.reload();
                 library.setSelectedAuthor({} as IAuthor);
             });
         } else {
             handler(id, formData).then(() => {
-                // navigate(MAIN_ROUTE);
-                navigate(AUTHOR_ROUTE + '/' + library.selectedAuthor.id);
+                window.location.reload();
                 library.setSelectedAuthor({} as IAuthor);
             });
         }

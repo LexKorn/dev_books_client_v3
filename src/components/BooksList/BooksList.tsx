@@ -27,7 +27,7 @@ const BooksList: React.FC<BooksListProps> = observer(({author}) => {
 
     useEffect(() => {
         fetchBooks()
-            .then(data => setBooks(data))
+            .then(data => setBooks(data.sort((a: IBook, b: IBook) => a.name > b.name ? 1 : -1)))
             .catch(err => alert(err.message))
     }, [library.toggle]);
 

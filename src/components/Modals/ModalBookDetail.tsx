@@ -30,8 +30,9 @@ const ModalBookDetail: React.FunctionComponent<ModalBookDetailProps> = observer(
     const removeBook = () => {
         if (window.confirm('Ты действительно хочешь удалить книгу?')) {
             deleteBook(book.id);
-            library.setToggle(!library.toggle);
+            // window.location.reload();
             onHideBook();
+            library.setToggle(library.toggle);
         }        
     };
 
