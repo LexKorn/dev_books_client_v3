@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Modal, Button} from 'react-bootstrap';
 
 import { createBook } from '../../http/bookAPI';
-// import { IBook } from '../../types/types';
 import CUBook from '../CreateUpdate/CUBook';
 
 interface ModalBookAddProps {

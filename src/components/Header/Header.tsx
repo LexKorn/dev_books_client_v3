@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-import { MAIN_ROUTE, ADD_AUTHOR_ROUTE, ADD_BOOK_ROUTE, AUTHORS_ROUTE, NOTE_ROUTE, MANUAL_ROUTE } from "../../utils/consts";
+import { MAIN_ROUTE, ADD_AUTHOR_ROUTE, AUTHORS_ROUTE, NOTE_ROUTE, MANUAL_ROUTE } from "../../utils/consts";
 import { Context } from '../../index';
 
 import './header.sass';
@@ -51,11 +51,6 @@ const Header: React.FC = () => {
                                     + АВТОР
                                 </NavLink>
                             </li>
-                            {/* <li className="header__menu_item">
-                                <NavLink to={ADD_BOOK_ROUTE} className={location.pathname === ADD_BOOK_ROUTE ? "active" : ''} >
-                                    + КНИГА
-                                </NavLink>
-                            </li> */}
                             <li className="header__menu_item">
                                 <NavLink to={NOTE_ROUTE} className={location.pathname === NOTE_ROUTE ? "active" : ''} >
                                     ПРОЧИТАТЬ

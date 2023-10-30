@@ -25,7 +25,6 @@ const QuoteItem: React.FC<ListItemProps> = ({item, onDelete, onEdit}) => {
             <div 
                 className="quote-item__icons"
                 style={{visibility: hover ? 'visible' : 'hidden'}}
-                // style={{display: hover ? 'flex' : 'none'}}
             >
                 <div>
                     <i className="bi bi-pencil-fill list-item__icon" onClick={() => onEdit(item)}></i>

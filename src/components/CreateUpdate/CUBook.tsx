@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Context } from '../../index';
 import { fetchAuthors } from '../../http/authorAPI';
-import { ADD_AUTHOR_ROUTE, AUTHOR_ROUTE, MAIN_ROUTE } from '../../utils/consts';
+import { ADD_AUTHOR_ROUTE } from '../../utils/consts';
 import { IAuthor } from '../../types/types';
 
 interface CUBookProps {

@@ -35,8 +35,6 @@ const BooksList: React.FC<BooksListProps> = observer(({author}) => {
         setAuthorBooks(books.filter(book => book.authorId === author.id));
     }, [books]);
 
-    // const authorBooks: IBook[] = books.filter(book => book.authorId === author.id);
-
     const selectBook = (item: IBook) => {
         setBook(item);
         setVisible(true)
