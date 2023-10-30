@@ -114,7 +114,7 @@ const CUAuthor: React.FC<CUAuthorProps> = observer(({id, name, description, file
                         onChange={selectFile}
                     />
                     <Dropdown className="mt-3 mb-3">
-                        <Dropdown.Toggle variant={"outline-dark"}>{library.selectedCountry.name || 'Выберите страну'}</Dropdown.Toggle>
+                        <Dropdown.Toggle variant={"outline-dark"}>{library.selectedCountry?.name || 'Выберите страну'}</Dropdown.Toggle>
                         <Dropdown.Menu style={{ maxHeight: "200px", overflowY: "scroll" }}>
                             {library.countries.map(country => 
                                 <Dropdown.Item 

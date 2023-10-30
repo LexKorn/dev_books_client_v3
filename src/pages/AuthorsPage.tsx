@@ -25,7 +25,7 @@ const AuthorsPage: React.FC = observer(() => {
         getAuthors();
         fetchBooks().then(data => library.setBooks(data));
         fetchCountries().then(data => library.setCountries(data));
-    }, []);
+    }, [library.toggle]);
   
     function getAuthors() {
         fetchAuthors()

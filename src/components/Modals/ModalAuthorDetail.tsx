@@ -28,9 +28,15 @@ const ModalAuthorDetail: React.FunctionComponent<ModalAuthorDetailProps> = obser
 
     const removeAuthor = () => {
         if (window.confirm('Ты действительно хочешь удалить автора?')) {
-            deleteAuthor(author.id);
-            library.setToggle(!library.toggle);
-            onHideAuthor();
+            deleteAuthor(author.id).then(() => {
+                library.setToggle(!library.toggle);
+                library.setSelectedCountry({
+                    id: 0,
+                    name: '',
+                    userId: 0
+                });
+                onHideAuthor();
+            });            
         }        
     };
 
