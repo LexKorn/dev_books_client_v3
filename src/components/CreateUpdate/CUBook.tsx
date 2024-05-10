@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Container, Button, Form, Dropdown} from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
@@ -29,6 +29,7 @@ interface CUBookProps {
 const CUBook: React.FC<CUBookProps> = observer(({id, name, link, rating, comment, file, setName, setLink, setRating, setComment, setFile, handler, title, btnName}) => {
     const {library} = useContext(Context);
     const navigate = useNavigate();
+    const inputRef = useRef(null);
 
     useEffect(() => {
         fetchAuthors().then(data => library.setAuthors(data.sort((a: IAuthor, b: IAuthor) => a.name > b.name ? 1 : -1)));
@@ -83,6 +84,11 @@ const CUBook: React.FC<CUBookProps> = observer(({id, name, link, rating, comment
         }
     };
 
+    const handleInputClick = () => {
+        //@ts-ignore
+        inputRef.current.select();
+    };
+
 
     return (
         <Container className="d-flex justify-content-center">
@@ -103,6 +109,8 @@ const CUBook: React.FC<CUBookProps> = observer(({id, name, link, rating, comment
                     />
                     <label htmlFor="rating" className="mt-3">Поставьте оценку книги от 1 до 10</label> 
                     <Form.Control
+                        ref={inputRef}
+                        onClick={handleInputClick}
                         value={rating}
                         type="number"
                         onChange={e => setRating(+e.target.value)}
